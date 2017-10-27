@@ -13,8 +13,10 @@ install:
   - pip install -r requirements/local.txt
 before_script:
   - psql -U postgres -c 'CREATE DATABASE "oc";'
+  - chmod -R a+x scripts
 script:
   - coverage run manage.py test --settings=django_docker_example.settings
+  - ./scripts/docker-publish-travis.sh
 after_success:
   - codecov
 notifications:
