@@ -1,5 +1,8 @@
 sudo: false
 language: python
+branches:
+  only:
+    - master
 env:
   - DATABASE_URL=postgres://postgres:@localhost:5432/oc
 python:
@@ -14,3 +17,7 @@ script:
   - coverage run manage.py test --settings=django_docker_example.settings
 after_success:
   - codecov
+notifications:
+  email:
+    on_success: always
+    on_failure: always
